@@ -1,0 +1,573 @@
+SELECT Transforum.xy.Cust, Transforum.xy.Name, Transforum.xy.Longitude, Transforum.xy.Latitude, Transforum.CustGroup.Group
+FROM Transforum.xy
+INNER JOIN Transforum.CustGroup
+ON Transforum.CustGroup.Cust = Transforum.xy.Cust
+WHERE Transforum.CustGroup.Group = "C";
+
+
+////////
+
+
+SELECT * FROM(SELECT Cust, Name, Latitude, Longitude FROM Transforum.xy)
+ WHERE Latitude >= 41.9595 and Latitude <=42.5 
+and Longitude <= -87.9074 and Longitude >= -88;
+
+
+///////
+
+
+SELECT MAX(Latitude) FROM Transforum.xy;
+
+
+SELECT * 
+FROM Transforum.xy
+WHERE  Latitude >= 41.9595 and  
+Latitude <= 41.9595 + SQRT(POW((44 - 41.9595), 2) + POW((-71.127843 - -115.04827),2)) and 
+Latitude >= 41.9595  - SQRT(POW((44 - 41.9595), 2) + POW((-71.127843 - -115.04827),2)) ;
+
+0.4466992836 = SQRT(POWER((42.5 - 41.9595), 2) + POWER((-88.00 - -87.9074)
+
+41.9595 + SQRT(POWER((42.5 - 41.9595), 2) + POWER((-88.00 - -87.9074) * cos(360)
+
+Create a query that deletes table after use
+
+DROP TABLE Transforum.(name of table);
+
+#standardSQL
+DELETE FROM Transforum.temp_GetCust WHERE true;
+insert into Transforum.temp_GetCust (CustNum, Week, Delete, Now) Values ("worked", "worked", "d", 123.241);
+
+lat1 = 5
+lat2 = 6
+lon1 = 4
+lon2 = 3
+
+circle = sqrt((6-5)^2 + (3-4)^2)
+sqrt(2) = 1.41421356
+
+/////
+#standardSQL
+UPDATE Transforum.temp_GetCust
+SET Now = 777.77
+WHERE Custnum = 'Sean' and Week = 'mon-day-year';
+
+///////
+SELECT Transforum.number1.name, Transforum.number2.name, Transforum.number3.name, Transforum.number3.num
+FROM Transforum.number1
+INNER JOIN Transforum.number2 ON Transforum.number1.num = Transforum.number2.num
+INNER JOIN Transforum.number3 ON Transforum.number2.num = Transforum.number3.num;
+
+
+////
+
+latitude min = 
+latitude max = 
+longitude min = 
+longitude max = 
+
+SELECT * FROM Places WHERE
+    (Lat => 1.2393 AND Lat <= 1.5532) AND (Lon >= -1.8184 AND Lon <= 0.4221)
+AND
+    acos(sin(1.3963) * sin(Lat) + cos(1.3963) * cos(Lat) * cos(Lon - (-0.6981))) <= 0.1570;
+
+SELECT * FROM Transforum.xy WHERE
+(Latitude => 42.5792 AND Latitude <= 42.5 ) AND (Longitude >= -90 AND Longitude <= -88.5415)
+AND
+acos(sin(1.3963) * sin(42.5792) + cos(1.3963) * cos(
+
+//////
+
+SELECT * 
+FROM TableA A
+LEFT JOIN TableB B
+ON A.Key = B.Key
+WHERE B.Key IS NULL
+
+Left join means that you are using TableA's data but comparing it using only through
+tableB's variables. This means it will return all of TableA's data and what ever
+common data in TableB's table. 
+
+SELECT * 
+FROM TableA A
+RIGHT JOIN TableB B
+ON A.Key = B.Key
+WHERE A.Key IS NULL
+
+Right join means that you are using TableB's data but comparing it using only through
+table A's variables. This means it will return all of TableA's data and what ever
+common data in TableB's table.
+
+SELECT * 
+FROM TableA A
+INNER JOIN TableB B
+ON A.Key = B.Key
+
+
+The most common is INNER JOIN where you just compare on two key sets in each file.
+The data is returned for just the common keys. 
+
+
+SELECT Transforum.number1.name, Transforum.number2.name, 
+       Transforum.number3.name, Transforum.number3.num
+FROM Transforum.number1
+INNER JOIN Transforum.number2 ON Transforum.number1.num = Transforum.number2.num
+INNER JOIN Transforum.number3 ON Transforum.number2.num = Transforum.number3.num;
+
+Each of the tables number1, number2, and number3 have a common are linked on INNER JOIN's.
+The join is trying to find where the there is a common number in the column num. In the
+tables that were created there are several numbers in each but only some are the same. 
+The inner join will return where they are the same. 
+
+
+///////
+
+SELECT T.cust T.cases
+FROM Transforum.Test_Date T
+WHERE T.Date_date = '1999-02-01';
+
+SELECT * 
+FROM(SELECT cust, cases, Date_date, Date_string FROM Transforum.Test_Date)
+WHERE Date_string = '03-28-1999-12-59-59';
+
+
+DECLARE @MinDate DATE = '20140101',
+        @MaxDate DATE = '20140106';
+
+SELECT  Date
+FROM    dbo.Calendar
+WHERE   Date >= @MinDate
+AND     Date < @MaxDate;
+
+SELECT * 
+FROM Transforum.Test_Date
+WHERE Date_Time = "1999-01-01 01:01:01";
+
+INSERT INTO
+  Transforum.Test_Date (cust,
+    cases,
+    Date_date,
+    Date_string, Date_Time, Date_stamp)
+VALUES
+  (5, 80, '1999-01-28', 'month-day-year-hour-minute-second','1999-01-01 01:01:01', '1999-01-01 01:01:01 UTC');
+
+
+
+//////////////////////////////////////////////////////////////////
+Query for table 1:
+
+--check all entries from customer to find last date that needs to updated
+SELECT * 
+FROM Transforum.masterTestTable
+ORDER BY CustomerId DESC;
+
+--Check to see if the entry exists based upon id and date
+SELECT * 
+FROM Transforum.masterTestTable
+WHERE CustomerId = 123458789 and Timestamp = "2018-11-15 09:52:15";
+
+--Updates entry based upon date and customer id and sets older date to inactive
+--Timestamp NOT IN (SELECT Timestamp FROM Transforum.AlterTable)
+#standardSQL
+UPDATE Transforum.masterTestTable M
+SET STATUS = "Inactive", TimestampChange = "2018-11-20 09:52:14"
+WHERE
+CustomerId = (SELECT CustomerId FROM Transforum.AlterTable A WHERE A.CustomerID = M.CustomerId) OR
+DeliveryDay <> (SELECT DeliveryDay FROM Transforum.AlterTable A WHERE A.CustomerID = M.CustomerId) OR
+Route <> (SELECT Route FROM Transforum.AlterTable A WHERE A.CustomerID = M.CustomerId) OR
+Stop <> (SELECT Stop FROM Transforum.AlterTable A WHERE A.CustomerID = M.CustomerId);
+
+#standardSQL
+UPDATE Transforum.masterTestTable M
+SET STATUS = "Inactive", TimestampChange = "2018-11-20 09:52:14"
+WHERE
+CustomerId = (SELECT CustomerId FROM Transforum.AlterTable A WHERE A.CustomerID = M.CustomerId) OR
+DeliveryDay <> (SELECT DeliveryDay FROM Transforum.AlterTable A WHERE A.CustomerID = M.CustomerId) OR
+Route <> (SELECT Route FROM Transforum.AlterTable A WHERE A.CustomerID = M.CustomerId) OR
+Stop <> (SELECT Stop FROM Transforum.AlterTable A WHERE A.CustomerID = M.CustomerId);
+
+#standardSQL
+UPDATE Transforum.masterTestTable
+SET STATUS = "Inactive", TimestampChange = "2018-11-20 09:52:14"
+FROM Transforum.masterTestTable M
+LEFT JOIN Transforum.AlterTable A ON 
+A.CustomerId = M.CustomerId OR 
+A.DeliveryDay <> M.DeliveryDay OR
+A.Route <> M.Route OR
+A.Stop <> M.Stop;
+
+#standardSQL
+UPDATE Transforum.masterTestTable
+SET STATUS = "Inactive", TimestampChange = "2018-11-20 09:52:14"
+FROM Transforum.masterTestTable M
+LEFT JOIN Transforum.AlterTable A ON
+A.CustomerId = M.CustomerId
+WHERE A.DeliveryDay <> M.DeliveryDay OR
+A.Route <> M.Route OR
+A.Stop <> M.Stop;
+
+
+SELECT * 
+FROM Transforum.masterTestTable M
+LEFT JOIN Transforum.AlterTable A ON
+A.CustomerId = M.CustomerId
+WHERE A.DeliveryDay <> M.DevliveryDay OR
+A.Route <> M.Route
+A.Stop <> M.Stop;
+
+SELECT Transforum.number1.name, Transforum.number2.name, 
+       Transforum.number3.name, Transforum.number3.num
+FROM Transforum.number1
+INNER JOIN Transforum.number2 ON Transforum.number1.num = Transforum.number2.num
+INNER JOIN Transforum.number3 ON Transforum.number2.num = Transforum.number3.num;
+
+
+////////////////////////////////////////////////////////////////////
+Query for table 2:
+
+--check to see if the update is valid
+SELECT * 
+FROM Transforum.AlterTable
+ORDER BY CustomerId DESC;
+
+--BROKEN SINCE TIMESTAMP CHANGE
+--insert into master id, day, route, and stop if they are not in the master
+--Timestamp NOT IN (SELECT Timestamp FROM Transforum.masterTestTable)
+#standardSQL
+INSERT INTO Transforum.masterTestTable (Timestamp, CustomerID, DeliveryDay, Route, Stop)
+SELECT Timestamp, CustomerID, DeliveryDay, Route, Stop
+FROM Transforum.AlterTable
+WHERE 
+CustomerId NOT IN (SELECT CustomerId FROM Transforum.masterTestTable) AND
+DeliveryDay NOT IN (SELECT DeliveryDay FROM Transforum.masterTestTable) OR
+Route NOT IN (SELECT Route FROM Transforum.masterTestTable) OR
+Stop NOT IN (SELECT Stop FROM Transforum.masterTestTable);
+
+#standardSQL
+UPDATE Transforum.masterTestTable
+SET STATUS = "Active", TimestampChange = "2018-11-20 09:52:14"
+WHERE STATUS is NULL;
+
+
+
+
+Timestamp   	CustomerId  	DeliveryDay	Route	Stop	STATUS	TimestampChange
+2018-11-15 09:52:14	123456789	Th	1250	10	Active	2018-11-15 09:52:14
+2018-11-15 09:52:14	123458789	Th	1250	20	Active	2018-11-15 09:52:14
+2018-11-15 09:52:14	123460789	Th	1250	30	Active	2018-11-15 09:52:14
+2018-11-15 09:52:14	123462789	Th	1250	40	Active	2018-11-15 09:52:14
+2018-11-15 09:52:14	123464789	Th	1250	50	Active	2018-11-15 09:52:14
+
+Timestamp	CustomerId	DeliveryDay	Route	Stop
+2018-11-15 09:52:14	123456789	Th	1250	10
+2018-11-20 09:52:14	123458789	FR	1250	20
+2018-11-20 09:52:14	123460789	Th	3000	30
+2018-11-15 09:52:14	123462789	Th	1250	40
+2018-11-15 09:52:14	123464789	Th	1250	50
+
+
+///////////////////////
+
+/*
+This query will delete all values in master table that are equal to the values in 
+the temp table. It will delete the values based on if all corresponding values are the
+same timestamp, customerid, deliveryday, route, and stop.
+*/
+#standardSQL
+DELETE FROM Transforum.masterTestTable M
+WHERE EXISTS(SELECT 1 FROM Transforum.AlterTable A 
+		WHERE A.Timestamp = M.Timestamp AND
+			A.CustomerId = M.CustomerId AND
+			A.DeliveryDay = M.DeliveryDay AND
+			A.Route = M.Route AND
+			A.Stop = M.Stop);
+
+/*
+This will insert all values in temp table into master table.
+*/
+#standardSQL
+INSERT INTO Transforum.masterTestTable (Timestamp, CustomerId, DeliveryDay, Route, Stop)
+SELECT Timestamp, CustomerID, DeliveryDay, Route, Stop
+FROM Transforum.AlterTable;
+
+/*
+If there are any values that are values that were just inserted into master table that have
+missing data. This function will fill the remaining spots. In this case, it sets their status
+to active and inputs the timestamp in which the change occured. 
+*/
+#standardSQL
+UPDATE Transforum.masterTestTable
+SET STATUS = "Active", TimestampChange = "2018-11-20 09:52:14"
+WHERE STATUS is NULL AND CustomerId IS NOT NULL;
+
+
+//////////////////////////////////
+
+
+/*
+This query updates all records if the customerId is already in the database.
+It will not touch the date in which the customer was first added. 
+Even if there were no changes the information, it will still copy the information
+over, the information will however still be the same information. Then any changed
+information will replace the older information. Then it will set the route to active. 
+The only manual changes that are needed are the date at which the change occurs. Unless
+you have the value of date actually equal to DATE instead of a STRING. If you wish to change
+set value to DATE in bigquery and change TimestampChange = CURRENT_DATE()
+*/
+#standardSQL
+UPDATE Transforum.masterTestTable
+SET DeliveryDay = A.DeliveryDay, Route = A.Route, Stop = A.Stop, STATUS = "Active", TimestampChange = "2018-11-20 09:52:14"
+FROM Transforum.AlterTable A
+WHERE A.CustomerId = masterTestTable.CustomerId;
+
+/*
+If there is a new customer based on CustomerId it will add it to the master table.
+*/
+#standardSQL
+INSERT INTO Transforum.masterTestTable (Timestamp, CustomerId, DeliveryDay, Route, Stop)
+SELECT Timestamp, CustomerId, DeliveryDay, Route, Stop
+FROM Transforum.AlterTable A
+WHERE NOT EXISTS (SELECT * FROM Transforum.masterTestTable
+WHERE CustomerId = A.CustomerId);
+
+
+/*delete table after use*/
+#standardSQL
+DROP TABLE Transforum.number1;
+
+/*This will find only one of each occurance for each select variable*/
+#standardSQL
+SELECT DISTINCT Timestamp, CustomerId, DeliveryDay, Route, Stop
+FROM Transforum.AlterTable A;
+
+/*Gathers all duplicates and tells how many times they happen, remove timestamp
+out of select statement if no need for it*/
+#standardSQL
+SELECT MAX(Timestamp), MAX(CustomerId), MAX(DeliveryDay), MAX(Route), MAX(Stop), COUNT(*)
+FROM Transforum.masterTestTable
+GROUP BY CustomerId
+HAVING COUNT(*) > 1;
+
+/*or use this to see all similiar rows*/
+SELECT Timestamp, CustomerId, DeliveryDay, Route, Stop, COUNT(*)
+FROM Transforum.masterTestTable
+GROUP BY Timestamp, CustomerId, DeliveryDay, Route, Stop;
+
+/*sum based on week*/
+SELECT custnum, week, SUM(cases)
+FROM Transforum.sumBaseTable
+GROUP BY custnum, week
+ORDER BY custnum, week;
+
+/*sum based on day*/
+SELECT custnum, day, SUM(cases)
+FROM Transforum.sumBaseTable
+GROUP BY custnum, day
+ORDER BY custnum;
+
+#standardSQL
+DELETE Transforum.masterTestTable
+WHERE CustomerId NOT IN (SELECT MAX(CustomerId)
+FROM Transforum.masterTestTable
+GROUP BY Timestamp, CustomerId, DeliveryDay, Route, Stop, STATUS, TimestampChange
+HAVING COUNT(*) > 1);
+
+/*For this to work, you need to insert a temp identifier that is used to find all values.
+Then if any value is groups (duplicates) it will delete the max (or top) duplicate.
+This may have to be run multiple times in order to make sure every duplicate is
+destoryed*/
+#standardSQL
+DELETE FROM Transforum.masterTestTable
+WHERE tempID NOT IN (SELECT MAX(tempID) 
+FROM Transforum.masterTestTable 
+GROUP BY Timestamp, CustomerId, DeliveryDate, Route, Stop, STATUS, TimestampChange;
+
+
+/*insert sums into new table*/
+#standardSQL
+INSERT INTO Transforum.sumAlterTable(custnum, week, cases)
+SELECT custnum, week, SUM(cases)
+FROM Transforum.sumBaseTable
+GROUP BY custnum, week
+ORDER BY custnum, week;
+
+
+SELECT * 
+FROM Transforum.TransDetail
+ORDER BY CustName DESC;
+
+COUNT(*)
+FROM Transforum.tbl_transdetail;
+
+SELECT COUNT(*)
+FROM Transforum.tbl_transdetail
+WHERE CustName is not null;
+
+#standardSQL
+SELECT TIMESTAMP_DIFF(TIMESTAMP(Arrival), TIMESTAMP(Departure), SECOND)
+FROM Transforum.tbl_transdetail;
+
+#standardSQL
+SELECT DATE_DIFF(PARSE_DATE('%m/%d/%Y', Fiscal_Date), PARSE_DATE('%m/%d/%Y', Fiscal_Date), DAY)
+FROM Transforum.tbl_transdetail;
+
+#standardSQL
+UPDATE Transforum.tbl_transdetailinvoice 
+SET DelvFlag = "delv"
+FROM Transforum.ref_table r
+WHERE 
+tbl_transdetailinvoice.Invoice_Type = r.InvoiceType AND
+tbl_transdetailinvoice.Delivery_Method = r.DeliveryMethod AND
+tbl_transdetailinvoice.Order_Type = r.OrderType AND
+r.DelvFlag = "delv";
+
+#standardSQL
+UPDATE Transforum.tbl_transdetail 
+SET DelvFlag = "non-delv"
+FROM Transforum.tbl_transdetailinvoice i
+WHERE 
+tbl_transdetail.Fiscal_Date = i.Fiscal_Day AND
+tbl_transdetail.Ship_DC = i.Ship_DC AND
+tbl_transdetail.CustNum = i.CustNum AND 
+i.DelvFlag = "non-delv";
+
+SELECT COUNT(DelvFlag)
+FROM Transforum.tbl_transdetailinvoice
+WHERE DelvFlag IS NULL;
+
+SELECT COUNT(*)
+FROM Transforum.tbl_transdetailinvoice i, Transforum.tbl_transdetail t
+WHERE i.CustNum = t.CustNum AND i.Ship_DC = t.Ship_DC t.Fiscal_Day AND i.Fiscal_Date;
+
+UPDATE Transforum.tbl_transdetail t
+SET t.DelvFlag = "non-delv"
+FROM Transfroum.tbl_transdetailinvoice i
+INNER JOIN t ON i.CustNum = t.CustNUM
+WHERE i.CustNum = t.CustNum AND i.Ship_DC = t.Ship_DC t.Fiscal_Day AND i.Fiscal_Date;
+
+
+UPDATE Transforum.tbl_transdetail
+SET DelvFlag = "non-delv"
+FROM Transforum.tbl_transdetailinvoice i
+INNER JOIN Transforum.tbl_transdetail t ON i.CustNum = t.CustNUM AND i.Ship_DC = t.Ship_DC AND i.Fiscal_Day = t.Fiscal_Date
+WHERE i.DelvFlag = "non-delv";
+
+
+SELECT CustNum, Ship_DC, Fiscal_Date, DelvFlag, SUM(sumcases)
+FROM Transforum.tbl_transdetailinvoicesum
+GROUP BY CustNum, Ship_DC, Fiscal_Date, DelvFlag;
+
+INSERT INTO Transforum.tbl_transdetailinvoicesum (CustNum, Ship_DC, Fiscal_Date, DelvFlag, sumcases)
+SELECT CustNum, Ship_DC, Fiscal_Day, DelvFlag, SUM(Net_Cases_Purchased)
+FROM Transforum.tbl_transdetailinvoice
+GROUP BY CustNum, Ship_DC, Fiscal_Day, DelvFlag;
+
+Changing dates to format needed
+#standardSQL
+SELECT EXTRACT(DAYOFWEEK FROM PARSE_DATE('%m/%d/%Y',  Fiscal_Day))
+FROM Transforum.tbl_transdetailinvoice
+
+#standardSQL
+INSERT INTO Transforum.tbl_transdetailinvoiceweekly (CustNum, Fiscal_Day, W072019)
+SELECT CustNum, CAST(EXTRACT(DAYOFWEEK FROM PARSE_DATE('%m/%d/%Y',  Fiscal_Day)) AS STRING), CAST(SUM(Net_Cases_Purchased) AS STRING)
+FROM Transforum.tbl_transdetailinvoice i
+GROUP BY CustNum, Fiscal_Day;
+
+#standardSQL
+INSERT INTO Transforum.tbl_transdetailinvoicesumtemp (CustNum, Fiscal_Day,sumcases)
+SELECT CustNum, CAST(EXTRACT(DAYOFWEEK FROM PARSE_DATE('%m/%d/%Y',  Fiscal_Day)) AS STRING), SUM(Net_Cases_Purchased)
+FROM Transforum.tbl_transdetailinvoiceW07 i 
+GROUP BY CustNum, Fiscal_Day;
+
+UPDATE Transforum.tbl_transdetailinvoiceweekly t
+SET W072019 = Cast(i.sumcases AS STRING)
+FROM Transforum.tbl_transdetailinvoicesumtemp i
+WHERE i.CustNum = t.CustNum and i.Fiscal_Day = t.Fiscal_Day;
+
+#standardSQL
+INSERT INTO Transforum.tbl_transdetailinvoiceweekly (CustNum, Fiscal_Day, W072019)
+SELECT CustNum, CAST(EXTRACT(DAYOFWEEK FROM PARSE_DATE('%m/%d/%Y',  Fiscal_Day)) AS STRING), CAST(SUM(Net_Cases_Purchased) AS STRING)
+FROM Transforum.tbl_transdetailinvoiceW07 i
+WHERE NOT EXISTS (SELECT 1 FROM Transforum.tbl_transdetailinvoiceweekly w WHERE i.CustNum = w.CustNum) 
+GROUP BY CustNum, Fiscal_Day;
+
+Delete
+From Transforum.tbl_transdetailinvoicesumtemp
+WHERE TRUE
+
+#standardSQL
+UPDATE Transforum.tbl_transdetailinvoiceW07
+SET Fiscal_DayOfWeek = CAST(EXTRACT(DAYOFWEEK FROM PARSE_DATE('%m/%d/%Y',  Fiscal_Day)) AS STRING)
+WHERE TRUE
+
+#standardSQL
+Update Transforum.tbl_transdetailinvoiceW07
+Set Fiscal_DayOfWeek = "Sat"
+WHERE CAST(EXTRACT(DAYOFWEEK FROM PARSE_DATE('%m/%d/%Y',  Fiscal_Day)) AS STRING) = "7"
+
+
+INSERT INTO Transforum.tbl_TransData_Temp (CustNum, Fiscal_Day, Service, Cases, Cubex, Weight)
+SELECT CAST(CustNum AS STRING), Fiscal_Day, SUM(ServiceTime), SUM(Cases), SUM(CAST(Cubex AS INT64)), SUM(CAST(Weight AS INT64))
+FROM Transforum.tbl_TransData d
+WHERE d.Fiscal_Week = "2018/01"
+GROUP BY CustNum, Fiscal_Day
+
+INSERT INTO Transforum.tbl_TransDataX_CustDay (CustNum, Day_Full, service2018_01, case2018_01, cube2018_01, weight2018_01)
+SELECT CustNum, Fiscal_Day, Service, Cases, Cubex, Weight
+FROM Transforum.tbl_TransData_Temp d
+WHERE TRUE
+
+#standardSQL
+UPDATE Transforum.tbl_TransDataX_CustDay
+Set CustNum = d.CustNum, Day_Full = d.Fiscal_Day, service2018_02 = d.Service, case2018_02 = d.Cases, cube2018_02 = d.Cubex, weight2018_02 = d.Weight
+FROM Transforum.tbl_TransData_Temp d
+WHERE TRUE
+
+INSERT INTO Transforum.tbl_data_invoice (Fiscal_Day_Name)
+SELECT d.Day_Full
+FROM Transforum.ref_Date d, Transforum.tbl_data_invoice i
+WHERE i.Fiscal_Day = d.Date_Integer
+
+Update Transforum.tbl_data_invoice
+SET Fiscal_Day_Name = d.Day_Full
+FROM Transforum.ref_Date d, Transforum.tbl_data_invoice i
+WHERE i.Fiscal_Day = d.Date_Integer
+
+UPDATE Transforum.airTest a
+SET NewColumn = t.Name
+FROM Transforum.Ttemp t
+WHERE SPLIT(t.Name, ' ')[OFFSET (0)] = a.fname AND SPLIT(t.Name, ' ')[OFFSET (1)] = a.lname AND a.DC = t.DC and a.prio = t.prio
+
+
+#standardSQL
+UPDATE Transforum.tbl_TransDataX_CustDay 
+Set CustNum = d.CustNum, Day_Full = d.Fiscal_Day, service2018_01 = d.Service, case2018_01 = d.Cases, cube2018_01 = d.Cubex, weight2018_01 = d.Weight
+FROM Transforum.tbl_TransData_Temp d
+WHERE tbl_TransDataX_CustDay.CustNum = d.CustNum and tbl_TransDataX_CustDay.Day_Full = d.Fiscal_Day;
+
+
+Update Transforum.tbl_Airclic_new
+SET Date_start = SPLIT(Start_Time, ' ')[OFFSET (0)]
+WHERE Start_Time = Start_Time
+
+
+UPDATE Transforum.tbl_Airclic a
+SET a.Route_Number = CAST(Reporting_Route as STRING)
+FROM Transforum.tbl_TransData d
+WHERE SPLIT(d.DrvierName, ' ')[OFFSET(0)] = SPLIT(a.Driver, ', ')[OFFSET(1)] and SPLIT(d.DrvierName, ' ')[OFFSET(1)] = SPLIT(a.Driver, ', ')[OFFSET(0)]
+
+SELECT d.DrvierName, a.Driver
+FROM Transforum.tbl_TransData d, Transforum.tbl_Airclic a
+WHERE SPLIT(d.DrvierName, ' ')[OFFSET(0)] = SPLIT(a.Driver, ', ')[OFFSET(1)] and SPLIT(d.DrvierName, ' ')[OFFSET(1)] = SPLIT(a.Driver, ', ')[OFFSET(0)]
+
+SELECT Weekday, Date_txt, Date_start
+FROM Transforum.ref_Date d, Transforum.tbl_Airclic a
+WHERE d.two_digit_year = Split(a.Date_Start, '/')[OFFSET(2)] and Split(d.Date_txt, '/')[OFFSET(0)] = SPLIT(a.Date_Start, '/')[OFFSET(0)] 
+and SPLIT(d.Date_txt, '/')[OFFSET(1)] = SPLIT(a.Date_Start, '/')[OFFSET(1)]
+
+Update Transforum.ref_UniversalMinute_2 u
+Set u.Airclic_day = a.Airclic_day, u.Airclic_hour = a.Airclic_hour , u.Airclic_min = a.Airclic_min
+FROM Transforum.temp_Airclic a
+WHERE u.Day = a.Day and CAST(u.Hour as STRING) = a.Hour_txt and CAST(u.Minute as STRING) = a.Minute_txt
+
+
+
